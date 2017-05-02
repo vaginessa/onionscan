@@ -205,9 +205,7 @@ func (os *OnionSpider) GetPage(uri string, base *url.URL, osc *config.OnionScanC
 	if strings.Contains(response.Header.Get("Content-Type"), "text/html") {
 		page = ParsePage(response.Body, base, snapshot)
 		osc.LogInfo(fmt.Sprintf("Grabbed %d byte document", len(page.Snapshot)))
-	} else if strings.Contains(response.Header.Get("Content-Type"), "image/jpeg") {
-		page = SnapshotBinaryResource(response.Body)
-		osc.LogInfo(fmt.Sprintf("Fetched %d byte image", len(page.Raw)))
+// Removed image scraping code was here.
 	} else if snapshot {
 		page = SnapshotResource(response.Body)
 		osc.LogInfo(fmt.Sprintf("Grabbed %d byte document", len(page.Snapshot)))
