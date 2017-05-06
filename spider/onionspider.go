@@ -158,7 +158,10 @@ func (os *OnionSpider) Crawl(hiddenservice string, osc *config.OnionScanConfig, 
 			_, exists := processed[url]
 			if !exists {
 				crawlRecord, _ := osc.Database.GetCrawlRecord(id)
-				
+				for _, image := range crawlRecord.Page.Images {
+-					if !exclude(image.Target) {
+-						processURI(image.Target, base)
+-					}
 				}
 
 				for _, anchor := range crawlRecord.Page.Anchors {
