@@ -206,9 +206,7 @@ func (os *OnionSpider) GetPage(uri string, base *url.URL, osc *config.OnionScanC
 		page = ParsePage(response.Body, base, snapshot)
 		osc.LogInfo(fmt.Sprintf("Grabbed %d byte document", len(page.Snapshot)))
 // Removed image scraping code was here.
-	} else if snapshot {
-		page = SnapshotResource(response.Body)
-		osc.LogInfo(fmt.Sprintf("Grabbed %d byte document", len(page.Snapshot)))
+	
 	} else {
 		osc.LogInfo(fmt.Sprintf("Content type of %s does not have a special handler: %v - minimal data will be collected", uri, response.Header["Content-Type"]))
 	}
